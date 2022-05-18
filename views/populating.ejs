@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .populating{
+            width:100vw;
+            height:100vh;
+            display:flex;
+            /* flex-direction: center; */
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            width :400px;
+            background-color: aliceblue;
+            margin :20px;
+            height:500px;
+            padding: 20px;
+            display:flex;
+            flex-direction: column;
+            position: relative;
+      
+            align-items: center;
+            
+        }
+
+        form div{
+            margin-bottom: 50px;
+            width: 100%;
+            
+        }
+        form input{
+           width: 300px;
+           position: absolute;
+           right: 30px;
+           height: 20px;
+           border-radius: 7px;
+        }
+
+        button{
+            outline: none;
+            border: none;
+            background-color: brown;
+            height: 30px;
+            width: 50px;
+            color: aliceblue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="populating">
+        <form  method="POST" action= <%= url %> > 
+            <div>
+                <label for ="Amount">Amount</label>
+                <input id="Amount" name="amount" required>
+            </div>
+            <div>
+                <label for ="Description">Description</label>
+                <input id="Description" name="description" required>
+            </div>
+            <div>
+                <label for ="Account"> Account</label>
+                <input id="Account" name="account" required>
+            </div>
+          
+            
+
+            <button class="submit"> Done </button>
+
+        </form>
+    </div>
+</body>
+</html>

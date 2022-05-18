@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <%- include("./partials/header"); %>
+ 
+
+    <div class="dashboard">
+         <div class="dash">
+
+            <div class="information">
+                <div class="div1">
+             <h2 class="h2dash">Dashboard</h2>
+
+                    <h3 class="dash-Name">
+                        <%if(loggedin){%>
+                            <%= loggedin.firstname %> <%= loggedin.middlename %><%= loggedin.lastname  %> 
+                            <%}%>
+                    </h3>
+                    <h4 class="dash-account number">
+                         <%if(loggedin){%>
+                        <%= loggedin.account_number  %>  
+                     <%}%> 
+                    </h4>
+
+                   
+                  <span>N balance:</span>  <span class="dash-balance"> 
+                       <%if(account_balance){%>
+                    <%=  account_balance  %>  
+                 <%}%> 
+                </span>
+       
+       
+                    
+                </div>
+                <div class="account-type">
+                    <p>active</p>
+                    <span class="account-type__">account type</span><span>savings</span>
+
+
+                </div >
+              
+
+
+
+            </div>
+           
+
+
+
+           <div class="fundandhistory">
+              <a href="/fund-account">
+
+                  <button class=" fund-account">
+                      fund account
+                  </button>
+              </a>
+              <a href="/withdraw">
+
+                  <button class="withdraw">
+                      withdraw
+                  </button>
+              </a>
+              
+
+                  <button class="viewtransactions">
+                     view transactions
+                  </button>
+              
+           </div>
+
+         </div>
+
+
+         <div class="services">
+             <p>services</p>
+             <div class="Airtime_data">
+                 <img src="">
+                 <span>
+
+                     Airtime & data
+                 </span> 
+                 
+                </div>
+             <div class="DSTV">
+                 <img src=" ">
+                 <span>
+
+                    DSTV
+                 </span> 
+                 
+                </div>
+             <div class="FundTransfer">
+                 <img src=" ">
+                 <span>
+
+                    FundTransfer
+                 </span> 
+                 
+                </div>
+            
+         </div>
+
+
+         <div class="accchart">
+
+            <p> acoount balance chart</p>
+
+             <div class="canvas">
+    
+                 <canvas></canvas>
+             </div>
+         </div>
+
+
+         <div class="transactions">
+            <p>
+                Transactions
+            </p>
+
+            <ol>
+                <div>
+                    <span class="amount">Amount</span>
+                    <span class="description">
+                        description
+                    </span>
+                    <span class="account">Account</span>
+                    <span class="invoice">invoice</span>
+                    <span class="Tax">Tax</span>
+                    <span class="Balance">Balance</span>
+                    <span class="date">date</span>
+                   
+
+                </div>
+
+                <%if(transactions){%> 
+                    
+                   <% if(transactions.length >=6){%>
+                    <% transactions =transactions.slice(-5) %>
+                    <%}%>
+                    <% for(i=0;i<=transactions.length-1;i++){ %>
+
+               
+                        <li>
+                            <span class="amount"><%=transactions[i].amount %></span>
+                            <span class="description"><%=transactions[i].description %></span>
+                            <span class="account"><%=transactions[i].account %></span>
+                            <span class="invoice"><%=transactions[i].invoice %></span>
+                            <span class="Tax"><%=transactions[i].tax %></span>
+                            <span class="Balance"><%=transactions[i].balance %></span>
+                            <span class="date"><%=transactions[i].date %></span>
+                        </li> 
+                         <% }  %> 
+                    <%}%>
+            </ol>
+           
+        </div>
+
+
+    
+
+
+    </div>
+
+
+
+
+    <%- include("./partials/footer")%>  
+
+
+<%if(acctarr){%>
+    <%var _acctarr = acctarr%>
+
+    <%}%>
+
+
+    <script >
+
+
+
+
+
+const viewtransactions =    document.querySelector(".viewtransactions")
+    const transactions =    document.querySelector(".transactions")
+    const ol =    transactions.querySelector("ol")
+   
+    viewtransactions.addEventListener("click",async e=>{
+        console.log("trans")
+        p=`<div>
+                    <span class="amount">Amoutn</span>
+                    <span class="descritption">
+                        description
+                    </span>
+                    <span class="acoount">Acoount</span>
+                    <span class="invoice">invoice</span>
+                    <span class="Tax">Tax</span>
+                    <span class="Balance">Balance</span>
+                    <span class="date">date</span>
+                   
+
+                </div>`
+        
+        let body =   await   fetch("/viewtransactions")
+      let  bod ;
+       await  body.json().then(e=>{console.log(e);
+        bod =e;
+            
+        })
+        
+        if(viewtransactions.classList.contains("full")){
+            if(bod.length>=6){
+
+                bod = bod.slice(-5)
+            }
+
+            viewtransactions.classList.remove("full")
+
+
+
+
+        }else{
+            viewtransactions.classList.add("full")
+        }
+        console.log(bod,"bod")
+       for(i=0;i<=bod.length-1;i++){
+           p += `
+           <li>
+                            <span class="amount">${bod[i].amount }</span>
+                            <span class="description">${bod[i].description }</span>
+                            <span class="account">${bod[i].account }</span>
+                            <span class="invoice">${bod[i].invoice }</span>
+                            <span class="Tax">${bod[i].tax }</span>
+                            <span class="Balance">${bod[i].balance }</span>
+                        </li> 
+           `
+       }
+
+       ol.innerHTML=p
+   
+            
+             
+    })
+
+    logout = document.querySelector(".logout")
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const canvas = document.querySelector("canvas")
+        console.log(canvas)
+        canvas.width="1000"
+        canvas.height="200"
+        console.log(canvas.height,"h")
+
+        let arr = `<%= acctarr %>`
+        arr=[0, ...arr.split(",")]
+        console.log(arr,"liiygyg")
+        if(!arr){
+
+             arr = [0]
+        }
+// let arr = [0]
+
+
+    //     arr=[0,30000,10000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+    //     50000,300000,50000,6000,
+        
+    //     50000,300000,50,6000,
+        
+    // ]
+
+  
+        class Arr {
+            constructor(x,y){
+                this.x=x
+                this.y=y
+
+            }
+        }
+
+        newarr=[]
+    //   let   newarrmaxnum;
+        
+        for(i=0;i<=arr.length-1;i++){
+
+            let  y= (0.004 * arr[i]) 
+          let  y1=canvas.height - ((0.0009 * arr[i])) .toFixed(0)-10
+          if(y1 <= 0){
+              console.log( " y1" ,y1)
+              
+            y1=20
+  
+              
+          }
+          let x= (i) * 50
+          if(
+                        x+20> canvas.width
+                        ){
+                            canvas.width=x +10
+                            // ctx.stroke()
+
+            }
+
+          newarr.push(new Arr(x,y1))
+            
+        }
+
+        ctx = canvas.getContext("2d")
+        // console.log(newarr)
+
+        for(i=0;i<=newarr.length-2;i++ ){
+        //   let  y= (0.004 * arr[i]) 
+        //   let  y1=canvas.height - ((0.0009 * arr[i])) .toFixed(0)-10
+        //   if(y1 <= 0){
+        //       console.log( " y1" ,y1)
+              
+        //     y1=20
+  
+              
+        //   }
+        //   let x= (i) * 50
+        // console.log(newarr[i])
+            let x= newarr[i].x
+            let y= newarr[i].y
+            let x1= newarr[i+1].x
+            let y1= newarr[i+1].y
+            let x2= newarr[i+2].x
+            let y2= newarr[i+2].y
+            let xd = (x+x1)/2
+            let yd = (y+y1)/2
+
+        //   console.log(x,y)
+                if(i!=newarr.length-1 ){
+                    // yd =y+5
+
+                    // if(y1 > y){
+                    //     xd = x
+                    // }else{
+                    //     yd =y
+                    // }
+                    ctx.beginPath()
+                    ctx.moveTo(x-10,y-10)
+                    if( i != 0 && newarr[i-1].xd!=undefined ) {
+                        xd =newarr[i-1].xd
+                        yd =newarr[i-1].yd
+                        ctx.moveTo(xd,yd)
+                        // console.log(i)
+                    }
+
+                    xd = (x+x1)/2
+                     yd = (y+y1)/2
+                    // ctx.quadraticCurveTo(x1,y1,x2,y2)
+                    ctx.quadraticCurveTo(x,y,xd,yd)
+                    // ctx.quadraticCurveTo(xd,yd,x1,y1)
+                    // ctx.lineTo(x+20,y+50)
+                    // ctx.arc(100,200,20,20,Math.PI*2,false)
+                    ctx.stroke()
+                    ctx.closePath()
+                    
+                }
+              
+                newarr[i].xd =xd
+                newarr[i].yd =yd
+
+
+
+                    // ctx.rect(x,y  ,10,10)
+                    
+                    
+                    
+            //         if(
+            //             xd > canvas.width
+            //             ){
+            //                 canvas.width=xd
+            //                 // ctx.stroke()
+
+            // }
+            if(
+                y > canvas.height
+            ){
+               
+
+            }
+        }
+
+        
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

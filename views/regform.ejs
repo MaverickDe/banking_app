@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="regform.css">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <%- include("./partials/header"); %>
+    <div class="form">
+
+    
+    <form action="/register" enctype="multipart/form-data"  method="POST"
+    >
+    
+        <fieldset>
+
+            <legend >Personal details</legend>
+         <p><i>please try to input the right information as not to affect you later in the long wrong</i></p>
+      
+
+             <div class="name">
+             <span>
+
+                 <label for="firstname">firstname</label>
+                   <input id="firstname" name="firstname" placeholder="firstname" 
+                   required type="text">
+             </span>  
+             <span>
+
+                 <label for="middlename" >middlename</label>
+                 <input id="middlename" name="middlename" required placeholder="middlename"type="text">
+             </span>  
+            <span>
+
+                 <label for="lastname" >lastname</label>
+                 <input id="lastname" name="lastname" required placeholder="lastname"type="text">
+             </span>
+
+            </div>
+
+          
+
+            <div class="biologicnomencleture">
+                <span>
+                    
+                    <label for="dateofBirth">Date of Birth</label>
+                    <input id="dateofBirth"  name ="dateofbirth"required type="date">
+                </span>
+                <span>
+
+                    <span>Gender</span>
+                    <label for="gendermale">male</label>
+                    <input id="gendermale"    type="radio" name="gender " value="male">
+                    <label for="genderfemale">female</label>
+                    <input id="genderfemale"  type="radio" name="gender" value="female">
+                </span>
+
+            </div>
+
+
+
+         </fieldset> 
+        <fieldset>
+            <legend>contact address</legend>
+            <div>
+                <span>
+                    <label for="phone1">Phone1</label>
+                    <input required  type="number" name="phone_number1" id="phone1">
+                </span>
+                <span>
+                    <label for="phone2">Phone2</label>
+                    <input required type="number" name="phone_number2" id="phone2">
+                </span>
+                <span>
+                    <label for="email">email</label>
+                    <input required type="email" name="email" id="email">
+                </span>
+                <span>
+                    <label for="password">Mobile App pasword</label>
+                    <input required  type="password" name="password" id="password">
+                </span>
+            </div>
+            <div>
+                <span style="width:100%">
+                    <label for="adress1">Temporary Adress</label>
+                    <textarea name="Temporary_adress" required style="width:100% ;min-height: 100px"  type="textarea" id="adress1"></textarea>
+                </span >
+                <span style="width:100%">
+                    <label for="adress2">permanent Adress</label>
+                    <textarea name="permanent_adress" required style="width:100%;min-height: 100px;" type="text" id="adress2"></textarea>
+                </span>
+            </div>
+            <div>
+                <span>
+                    <label for="country">Country</label>
+                    <input  name ="country "required type="text" id="country">
+                </span>
+                <span>
+                    <label for="LGA">LGA</label>
+                    <input name ="LGA"required type="text" id="LGA">
+                </span>
+                <span>
+                    <label for="postalcode">postalcode</label>
+                    <input name="postal-code" required type="number">
+                </span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>documents</legend>
+            <div>
+                <span>
+                    <select name="id" id="id">
+                    <option  value="NationalID">NationalID</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Voterscard">Voterscard</option>
+                    <option value="driverslic">drivers lic</option>
+                </select> 
+                <input required type="file" name="IDfile">
+                
+                </span> 
+                <span>
+                   <label for="nepabill">nepa bill</label>
+                <input  name ="nepabill"required id="nepabill" type="file" >
+                
+                </span>
+
+                <span>
+                    <label for="passportpics">
+                        passport
+                    </label>
+                    <input name="passportpics" required id ="passportpics"type="file">
+                </span> 
+            </div>
+
+           
+
+
+
+        </fieldset> 
+
+        <button type="submit">submit</button>
+    </form>
+    <a href="login"><button>login</button></a>
+</div>
+<%- include("./partials/footer")%>   
+
+</body>
+<!-- <script>
+    (async function(){
+       bb = await fetch("/register",{
+            method:"POST",
+            body:JSON.stringify({ff:"Ff"}),
+            headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+        })
+        bb.json().then(e=>{
+            console.log(e)
+        })
+        console.log(bb.json)
+        // console.log(JSON.parse(bb))
+
+    })() -->
+</script>
+</html>

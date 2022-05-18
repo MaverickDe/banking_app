@@ -1,0 +1,144 @@
+<link rel="stylesheet" href="bankapp.css">
+<header>
+    <div class="homepage-menu-button">
+        |||
+    </div>
+    <div >
+        <a href="/" class="home">
+            <img  class ="logo" src="imgs/1.jpg">
+        </a>
+    </div>
+    <div class="list-head">
+        
+     
+    <% if(loggedin){%>
+        <div><p class="a profilebtn" >profile</p></div> 
+        <div><a href=/logout>logout</a></div> 
+        
+        <% }  %> 
+        <%if(!loggedin){%>
+            <div> <a href="/">home</a>
+                <!-- <div class="header_option"></div> -->
+            </div>
+               <div> <a href="payment">payment</a>
+                
+            </div>
+            <div> <a href="/login" >login</a>
+            
+             <div class="header_option">
+                
+                 <a  href="/createaccount" class="createaccount"> createaccount</a>
+                 
+             </div></div>
+                
+<%}%>
+
+
+
+    </div>
+    <div class="header-input">
+        <div class="header-inputbars">
+        <div class="header-input-select">
+          <button style="width: 30px;height: 100%;">&gt;&gt;</button>
+          
+        </div>
+        
+        <input class="input-search" type="text" placeholder="..search..."> </div>
+        
+        <div class="header-inputtext">search....</div>
+        <div class="header-inputbutton">@</div>
+      
+    </div>
+</header>
+<div class="list-head2 ">
+    <% if(!loggedin){%>
+        <div>
+    
+            <a href="/home">home</a>
+          
+    
+        </div >
+        
+        <div>
+            <a href="/createaccount" >create account</a>
+            <div class="header_option" >
+                <a  href="/createaccount" class="createaccount"> createaccount</a>
+            </div>
+    
+        </div>
+        <% }  %> 
+    <% if(loggedin){%>
+
+        <div><p class="a profilebtn" >profile</p></div> 
+        <div><a href=/logout>logout</a></div> 
+        <% }  %> 
+        
+
+ 
+    
+
+</div>
+
+<div class="profile">
+
+<div class="content">
+    <% if(loggedin){%>
+    
+    <% for(log in loggedin){ %>
+
+        <div>
+            <p><%=log %>:</p>
+            <p id= <%= loggedin[log] %> ><%= loggedin[log] %></p>
+        </div>
+        <% }  %> 
+        <% }  %> 
+  
+</div>
+<button class="profileclose">close</button>
+
+</div>
+
+
+
+
+<div class="alert">
+    <div>
+        
+        <p> 
+           
+            <%if(err){%>
+                <%= err %>
+                <%}%>
+            </p>
+            
+            <div class="button">
+                <button class="ok">ok</button>
+                <button class="close">close</button>
+            </div>
+        </div> 
+    </div>
+    
+    <% if(err){%>
+        <script>
+    
+          const alert =  document.querySelector(".alert")
+          
+          alert.style.display="flex"
+          
+
+         
+          
+          alert.querySelectorAll("button").forEach(e=>{
+
+              e.style.display="none"
+          })
+          setTimeout(()=>{
+              alert.style.display="none"
+              alert.querySelectorAll("button").forEach(e=>{
+
+                  e.style.display="block"
+              })
+    
+           },3000)
+        </script>
+      <% } %>
