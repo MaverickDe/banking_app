@@ -2,9 +2,15 @@
 
 Bank app TypeScript starter repository.
 
-## Server starter
 
-```bash
+
+🔗 Link to app   [banking app](https://bankingapp12.herokuapp.com/)
+
+![Web capture_17-6-2022_03614_bankingapp12 herokuapp com](https://user-images.githubusercontent.com/100746581/191642809-defc0643-3cf9-43a1-9054-438ed8ee2a3a.jpeg)
+
+
+## Server starter
+```
 
 $ tsc.cmd
 $ npm run dev
@@ -16,6 +22,7 @@ $ npm run dev
 # the app does not contain any API call so is has no graphQL functions
 
 ```
+
 
 ## Space and Storage
 
@@ -47,7 +54,7 @@ $ npm run dev
 
 
 ## Funding and Withdrawal
-```bash
+```
 #Most banking app implements withdrwal and funding in the Admin side of the apllication by just subtracting and adding valuues to the users account balance
 
 #API comes into play when the user whans to transfer an amount of cash to a different bank
